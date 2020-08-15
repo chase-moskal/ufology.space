@@ -1,0 +1,62 @@
+
+@charset "utf-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+	font-size: 21px;
+	height: 100%;
+
+	font-family: Teko, "sans-serif";
+	color: #888;
+	background: #111;
+}
+
+a {
+	color: white;
+}
+
+.logoheader {
+	font-size: 3em;
+	color: cyan;
+	text-shadow: 0 0 10px rgba(255,255,255, 0.3);
+}
+
+.page-comingsoon {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding-top: 4em;
+}
+
+.page-comingsoon > p {
+	color: lime;
+}
+
+.page-comingsoon a {
+	opacity: 0.25;
+}
+
+.page-validator header {
+	padding: 1rem;
+	padding-bottom: 0;
+	text-align: center;
+}
+
+.page-validator main {
+	padding: 0 1rem;
+}
+
+ufo-validator::part(problems) {
+	color: red;
+}
+
+ufo-validator::part(valid) {
+	color: lime;
+}

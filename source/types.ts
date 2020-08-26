@@ -1,11 +1,13 @@
 
 export interface UfologyData {
 
+	// meta
+	shortname: string
+
 	// required
 	title: string
 	summary: string
 	grade: number
-	shortname: string
 
 	// optional
 	writeup?: string

@@ -78,12 +78,6 @@ export function validateDataYaml(dataYaml: string) {
 			assertString(data.title, "title", required, 4, 80)
 			assertString(data.summary, "summary", required, 12, 256)
 			assertNumber(data.grade, "grade", required, 0, 100)
-			assertString(data.shortname, "shortname", required, 2, 24)
-				&& assert(
-					/^[a-z][a-z0-9\-\_]+$/.test(data.shortname)
-						&& !/\-\-|\_\_|\-\_|\_\-/.test(data.shortname),
-					`"shortname" must be lowercase and start with a letter. it may contain letters or numbers. single dashes underscores can separate words`
-				)
 
 			assertString(data.writeup, "writeup", optional, 0, 10000)
 			assertBullets(data.labels, "labels", optional, 2, 32)

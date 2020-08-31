@@ -1,6 +1,6 @@
 
 import {UfologyData} from "./types.js"
-import {validateDataYaml} from "./validate-data-yaml.js"
+import {parseDataYaml} from "./parse-data-yaml.js"
 
 export async function loadDataList({
 		dataNames,
@@ -17,7 +17,7 @@ export async function loadDataList({
 	return Promise.all(dataNames.map(async dataName => {
 		const url = `${dataDirectory}/${dataName}/data.yaml`
 		const text = await fetch(url).then(response => response.text())
-		const {data, problems} = validateDataYaml(text)
+		const {data, problems} = parseDataYaml(text)
 
 		if (problems.length > 0)
 			throw new Error(`failed validation: ${dataName} - ${problems.join(";")}`)

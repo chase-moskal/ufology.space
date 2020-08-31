@@ -1,0 +1,114 @@
+
+@charset "utf-8";
+
+/*
+========================================================================
+:: FUNDAMENTALS ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+========================================================================
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--focus-outline: 3px solid rgba(0, 255, 0, 1);
+	--hover-outline: 4px solid rgba(128, 255, 128, 1);
+	--active-outline: 4px solid rgba(255, 255, 255, 1);
+}
+
+html, body {
+	font-size: 21px;
+	height: 100%;
+
+	font-family: Teko, "sans-serif";
+	color: #888;
+	background: #222;
+}
+
+*:focus {
+	outline: var(--focus-outline);
+}
+
+a {
+	color: #aaa;
+}
+
+/*
+========================================================================
+:: COMMON ACROSS PAGES :::::::::::::::::::::::::::::::::::::::::::::::::
+========================================================================
+*/
+
+body > header {
+	padding: 1rem;
+	padding-bottom: 0;
+	text-align: center;
+}
+
+.logoheader {
+	font-size: 3em;
+	color: cyan;
+	text-shadow: 0 0 10px rgba(255,255,255, 0.3);
+}
+
+.loading {
+	padding: 1rem;
+}
+
+/*
+========================================================================
+:: PAGE - VALIDATOR ::::::::::::::::::::::::::::::::::::::::::::::::::::
+========================================================================
+*/
+
+.page-validator main {
+	padding: 0 1rem;
+}
+
+ufo-validator::part(problems) {
+	color: red;
+}
+
+ufo-validator::part(valid) {
+	color: lime;
+}
+
+/*
+========================================================================
+:: PAGE - APP ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+========================================================================
+*/
+
+.page-app > * {
+	width: 90%;
+	margin: auto;
+	max-width: 1600px;
+}
+
+.page-app > header,
+.page-app > footer {
+	padding: 1rem;
+}
+
+.page-app > header {
+	padding-bottom: 0;
+	text-align: center;
+}
+
+.page-app > main {
+	background: #181818;
+}
+
+.page-app > footer {
+	margin-bottom: 2em;
+	background: #111;
+}
+
+@media (max-width: 600px) {
+	.page-app > * {
+		width: 100%;
+	}
+}

@@ -1,4 +1,12 @@
 
+export interface ImageData {
+	link: string
+	attribution: {
+		link: string
+		source: string
+	}
+}
+
 export interface UfologyData {
 
 	// meta
@@ -6,10 +14,12 @@ export interface UfologyData {
 
 	// required
 	title: string
+	subtitle: string
 	summary: string
 	grade: number
 
 	// optional
+	poster?: ImageData
 	writeup?: string
 	labels?: string[]
 	bullets?: string[]

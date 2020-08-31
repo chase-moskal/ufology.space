@@ -1,8 +1,9 @@
 
-import {jsYaml} from "js-yaml-chase-esm/dist/js-yaml.esm.js"
-import {UfologyData} from "./types.js"
+import yaml from "js-yaml-chase-esm"
+import {UfologyData, ImageData} from "./types.js"
+import {tabsToSpaces} from "./toolbox/tabs-to-spaces.js"
 
-export function validateDataYaml(dataYaml: string) {
+export function parseDataYaml(text: string) {
 	let data: UfologyData
 	const problems = []
 
@@ -11,7 +12,7 @@ export function validateDataYaml(dataYaml: string) {
 	//
 
 	try {
-		data = jsYaml.safeLoad(dataYaml)
+		data = yaml.safeLoad(tabsToSpaces(text))
 	}
 	catch (error) {
 		problems.push(`yaml parsing error: ${error.message}`)
@@ -35,7 +36,7 @@ export function validateDataYaml(dataYaml: string) {
 
 	function assertString(subject: string, key: string, necessary: boolean, min: number, max: number) {
 		let r = true
-		if (necessary) r = r && assert(isSet(subject), `"${key}" is required`)
+		if (necessary) r = r && assert(isSet(subject), `"${key}" string is required`)
 		if (isSet(subject)) {
 			r = r
 				&& assert(typeof subject === "string", `"${key}" must be string`)
@@ -47,7 +48,7 @@ export function validateDataYaml(dataYaml: string) {
 
 	function assertNumber(num: number, key: string, necessary: boolean, min: number, max: number) {
 		let r = true
-		if (necessary) r = r && assert(isSet(num), `"${key}" is required`)
+		if (necessary) r = r && assert(isSet(num), `"${key}" number is required`)
 		if (isSet(num)) {
 			r = r
 				&& assert(typeof num === "number", `"${key}" must be a number`)
@@ -57,9 +58,23 @@ export function validateDataYaml(dataYaml: string) {
 		return r
 	}
 
+	function assertImageData(imageData: ImageData, key: string, necessary: boolean) {
+		let r = true
+		if (necessary) r = r && assert(isSet(imageData), `"${key}" is required`)
+		if (isSet(imageData)) {
+			r = r
+				&& assert(!!imageData && typeof imageData === "object", `"${key}" must be object`)
+				&& assertString(imageData.link, `${key}.link`, true, 1, 256)
+				&& assert(!!imageData.attribution && typeof imageData.attribution === "object", `"${key}" must be object`)
+				&& assertString(imageData.attribution.link, `${key}.attribution.link`, true, 1, 1024)
+				&& assertString(imageData.attribution.link, `${key}.attribution.source`, true, 1, 512)
+		}
+		return r
+	}
+
 	function assertBullets(bullets: string[], key: string, necessary: boolean, min: number, max: number) {
 		let r = true
-		if (necessary) r = r && assert(isSet(bullets), `"${key}" is required`)
+		if (necessary) r = r && assert(isSet(bullets), `"${key}" is bullets are required`)
 		if (isSet(bullets)) {
 			if (r = r && assert(Array.isArray(bullets), `"${key}" must be bullet points`)) {
 				bullets.forEach((bullet, index) => {
@@ -75,9 +90,10 @@ export function validateDataYaml(dataYaml: string) {
 	if (data) {
 		try {
 
-			assertString(data.title, "title", required, 4, 80)
-			assertString(data.summary, "summary", required, 12, 256)
+			assertString(data.title, "title", required, 4, 40)
+			assertString(data.subtitle, "subtitle", required, 4, 80)
 			assertNumber(data.grade, "grade", required, 0, 100)
+			assertImageData(data.poster, "poster", optional)
 
 			assertString(data.writeup, "writeup", optional, 0, 10000)
 			assertBullets(data.labels, "labels", optional, 2, 32)

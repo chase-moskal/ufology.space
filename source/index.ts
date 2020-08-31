@@ -1,9 +1,20 @@
 
+import {themeComponents} from "metalshop/dist/metalfront/framework/theme-components.js"
+import {registerComponents} from "metalshop/dist/metalfront/toolbox/register-components.js"
+
+import {UfoCard} from "./components/ufo-card.js"
+import {UfoCatalog} from "./components/ufo-catalog.js"
+
+import theme from "./theme.css.js"
 import {loadDataList} from "./load-data-list.js"
 
-// import {registerComponents} from "metalshop/dist/metalfront/toolbox/register-components.js"
-
 void async function() {
+	const main = document.querySelector<HTMLDivElement>("main")
+
+	registerComponents(themeComponents(theme, {
+		UfoCard,
+		UfoCatalog,
+	}))
 
 	// read the ufo names script
 	const dataNames = document.querySelector("script[type=ufo-names]")
@@ -12,24 +23,20 @@ void async function() {
 		.map(line => line.trim())
 		.filter(line => line.length > 0)
 
-	// create catalog in loading state
-	const catalog = document.querySelector<HTMLDivElement>(".catalog")
-
-	// loading
+	// create loading indicator
 	const loading = (() => {
 		const element = document.createElement("div")
 		element.className = "loading"
-		catalog.appendChild(element)
+		main.appendChild(element)
 		return {
 			update(progress: number) {
 				element.textContent = `loading ${progress}/${dataNames.length}`
 			},
-			remove() {
-				catalog.removeChild(element)
+			end() {
+				main.removeChild(element)
 			},
 		}
 	})()
-
 	loading.update(0)
 
 	// load data yamls
@@ -39,11 +46,9 @@ void async function() {
 		updateProgress: loading.update,
 	})
 
-	loading.remove()
-
-	for (const item of data) {
-		const p = document.createElement("p")
-		p.textContent = item.shortname
-		catalog.appendChild(p)
-	}
+	// initialize catalog
+	const catalog = <UfoCatalog>document.createElement("ufo-catalog")
+	catalog.cardData = data
+	loading.end()
+	main.appendChild(catalog)
 }()

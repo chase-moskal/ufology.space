@@ -23,15 +23,5 @@
 		"**/.git/objects/**": true,
 		"**/.git/subtree-cache/**": true,
 		"**/node_modules/*/**": true,
-	},
-
-	"[markdown]": {
-		"editor.tabSize": 2,
-		"editor.insertSpaces": true,
-	},
-
-	"[yaml]": {
-		"editor.tabSize": 2,
-		"editor.insertSpaces": true,
 	}
 }

@@ -6,7 +6,7 @@ import {UfoCard} from "./components/ufo-card.js"
 import {UfoCatalog} from "./components/ufo-catalog.js"
 
 import theme from "./theme.css.js"
-import {loadReports} from "./load-reports.js"
+import {loadReports} from "./toolbox/load-reports.js"
 
 void async function() {
 	const main = document.querySelector<HTMLDivElement>("main")

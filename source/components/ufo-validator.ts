@@ -3,7 +3,7 @@ import {LitElement, css, property, html} from "lit-element"
 import {makeDebouncer} from "metalshop/dist/metalfront/toolbox/debouncer.js"
 import {mixinStyles} from "metalshop/dist/metalfront/framework/mixin-styles.js"
 
-import {parseReportYaml} from "../parse-report-yaml.js"
+import {parseReportYaml} from "../toolbox/parse-report-yaml.js"
 
 const styles = css`
 

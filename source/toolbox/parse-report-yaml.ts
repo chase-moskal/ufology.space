@@ -1,7 +1,7 @@
 
 import yaml from "js-yaml-chase-esm"
-import {UfoReport, ImageInfo} from "./types.js"
-import {tabsToSpaces} from "./toolbox/tabs-to-spaces.js"
+import {UfoReport, ImageInfo} from "../types.js"
+import {tabsToSpaces} from "./tabs-to-spaces.js"
 
 export function parseReportYaml(text: string) {
 	let report: UfoReport

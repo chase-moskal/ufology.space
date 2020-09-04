@@ -10,6 +10,7 @@ const styles = css`
 	display: block;
 	cursor: pointer;
 	background: #222;
+	user-select: none;
 }
 
 .poster {

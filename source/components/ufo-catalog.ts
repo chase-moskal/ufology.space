@@ -2,7 +2,7 @@
 import {LitElement, css, property, html} from "lit-element"
 import {mixinStyles} from "metalshop/dist/metalfront/framework/mixin-styles.js"
 
-import {UfologyData} from "../types.js"
+import {UfoReport} from "../types.js"
 
 const styles = css`
 
@@ -59,7 +59,7 @@ const styles = css`
 
  @mixinStyles(styles)
 export class UfoCatalog extends LitElement {
-	@property({type: Object}) cardData: UfologyData[]
+	@property({type: Object}) cardData: UfoReport[]
 
 	render() {
 		const {cardData} = this

@@ -2,7 +2,7 @@
 import {LitElement, css, property, html} from "lit-element"
 import {mixinStyles} from "metalshop/dist/metalfront/framework/mixin-styles.js"
 
-import {UfologyData} from "../types.js"
+import {UfoReport} from "../types.js"
 
 const styles = css`
 
@@ -77,7 +77,7 @@ const styles = css`
 
  @mixinStyles(styles)
 export class UfoCard extends LitElement {
-	@property({type: Object}) data: UfologyData
+	@property({type: Object}) data: UfoReport
 
 	render() {
 		const {data} = this
@@ -86,7 +86,7 @@ export class UfoCard extends LitElement {
 				${data.poster ? html`
 					<img
 						alt=""
-						src=${`data/${data.shortname}/${data.poster.link}`}
+						src=${`reports/${data.shortname}/${data.poster.link}`}
 						title=${`attribution: ${data.poster.attribution.source}`}
 						/>
 				` : null}

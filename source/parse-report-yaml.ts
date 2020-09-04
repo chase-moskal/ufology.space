@@ -1,10 +1,10 @@
 
 import yaml from "js-yaml-chase-esm"
-import {UfologyData, ImageData} from "./types.js"
+import {UfoReport, ImageInfo} from "./types.js"
 import {tabsToSpaces} from "./toolbox/tabs-to-spaces.js"
 
-export function parseDataYaml(text: string) {
-	let data: UfologyData
+export function parseReportYaml(text: string) {
+	let report: UfoReport
 	const problems = []
 
 	//
@@ -12,7 +12,7 @@ export function parseDataYaml(text: string) {
 	//
 
 	try {
-		data = yaml.safeLoad(tabsToSpaces(text))
+		report = yaml.safeLoad(tabsToSpaces(text))
 	}
 	catch (error) {
 		problems.push(`yaml parsing error: ${error.message}`)
@@ -58,7 +58,7 @@ export function parseDataYaml(text: string) {
 		return r
 	}
 
-	function assertImageData(imageData: ImageData, key: string, necessary: boolean) {
+	function assertImageData(imageData: ImageInfo, key: string, necessary: boolean) {
 		let r = true
 		if (necessary) r = r && assert(isSet(imageData), `"${key}" is required`)
 		if (isSet(imageData)) {
@@ -87,19 +87,19 @@ export function parseDataYaml(text: string) {
 		return r
 	}
 
-	if (data) {
+	if (report) {
 		try {
 
-			assertString(data.title, "title", required, 4, 40)
-			assertString(data.subtitle, "subtitle", required, 4, 80)
-			assertNumber(data.grade, "grade", required, 0, 100)
-			assertImageData(data.poster, "poster", optional)
+			assertString(report.title, "title", required, 4, 40)
+			assertString(report.subtitle, "subtitle", required, 4, 80)
+			assertNumber(report.grade, "grade", required, 0, 100)
+			assertImageData(report.poster, "poster", optional)
 
-			assertString(data.writeup, "writeup", optional, 0, 10000)
-			assertBullets(data.labels, "labels", optional, 2, 32)
-			assertBullets(data.bullets, "bullets", optional, 2, 2000)
-			assertBullets(data.persuasive, "persuasive", optional, 2, 1000)
-			assertBullets(data.dissuasive, "dissuasive", optional, 2, 1000)
+			assertString(report.writeup, "writeup", optional, 0, 10000)
+			assertBullets(report.labels, "labels", optional, 2, 32)
+			assertBullets(report.bullets, "bullets", optional, 2, 2000)
+			assertBullets(report.persuasive, "persuasive", optional, 2, 1000)
+			assertBullets(report.dissuasive, "dissuasive", optional, 2, 1000)
 
 		}
 		catch (error) {
@@ -107,5 +107,5 @@ export function parseDataYaml(text: string) {
 		}
 	}
 
-	return {data, problems}
+	return {report, problems}
 }

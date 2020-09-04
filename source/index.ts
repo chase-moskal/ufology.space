@@ -6,7 +6,7 @@ import {UfoCard} from "./components/ufo-card.js"
 import {UfoCatalog} from "./components/ufo-catalog.js"
 
 import theme from "./theme.css.js"
-import {loadDataList} from "./load-data-list.js"
+import {loadReports} from "./load-reports.js"
 
 void async function() {
 	const main = document.querySelector<HTMLDivElement>("main")
@@ -40,9 +40,9 @@ void async function() {
 	loading.update(0)
 
 	// load data yamls
-	const data = await loadDataList({
-		dataNames,
-		dataDirectory: "data",
+	const data = await loadReports({
+		reportNames: dataNames,
+		reportDirectory: "reports",
 		updateProgress: loading.update,
 	})
 

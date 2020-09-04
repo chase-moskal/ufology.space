@@ -3,7 +3,7 @@ import {LitElement, css, property, html} from "lit-element"
 import {makeDebouncer} from "metalshop/dist/metalfront/toolbox/debouncer.js"
 import {mixinStyles} from "metalshop/dist/metalfront/framework/mixin-styles.js"
 
-import {parseDataYaml} from "../parse-data-yaml.js"
+import {parseReportYaml} from "../parse-report-yaml.js"
 
 const styles = css`
 
@@ -55,7 +55,7 @@ export class UfoValidator extends LitElement {
 
 	private validate = () => {
 		if (this.dataYaml) {
-			const {problems} = parseDataYaml(this.dataYaml)
+			const {problems} = parseReportYaml(this.dataYaml)
 			this.problems = problems
 		}
 	}
@@ -75,7 +75,7 @@ export class UfoValidator extends LitElement {
 	render() {
 		return html`
 			<textarea
-				placeholder="enter data.yaml here"
+				placeholder="enter report.yaml here"
 				@change=${this.queueValidation}
 				@keyup=${this.queueValidation}
 			></textarea>
@@ -88,7 +88,7 @@ export class UfoValidator extends LitElement {
 							`)}
 						</ul>
 					` : html`
-						<p part="valid">valid data.yaml</p>
+						<p part="valid">valid report.yaml</p>
 					`}
 				` : null}
 			</div>

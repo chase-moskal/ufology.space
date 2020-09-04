@@ -1,5 +1,5 @@
 
-export interface ImageData {
+export interface ImageInfo {
 	link: string
 	attribution: {
 		link: string
@@ -7,7 +7,7 @@ export interface ImageData {
 	}
 }
 
-export interface UfologyData {
+export interface UfoReport {
 
 	// meta
 	shortname: string
@@ -19,7 +19,7 @@ export interface UfologyData {
 	grade: number
 
 	// optional
-	poster?: ImageData
+	poster?: ImageInfo
 	writeup?: string
 	labels?: string[]
 	bullets?: string[]

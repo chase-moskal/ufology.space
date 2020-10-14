@@ -77,28 +77,28 @@ const styles = css`
 
  @mixinStyles(styles)
 export class UfoCard extends LitElement {
-	@property({type: Object}) data: UfoReport
+	@property({type: Object}) report: UfoReport
 
 	render() {
-		const {data} = this
-		return html`
+		const {report} = this
+		return (report ?? null) && html`
 			<div class=poster>
-				${data.poster ? html`
+				${report.poster ? html`
 					<img
 						alt=""
-						src=${`reports/${data.shortname}/${data.poster.link}`}
-						title=${`attribution: ${data.poster.attribution.source}`}
+						src=${`reports/${report.shortname}/${report.poster.link}`}
+						title=${`attribution: ${report.poster.attribution.source}`}
 						/>
 				` : null}
 				<div class="overlay">
-					<p class=title>${data.title}</p>
-					<p class=subtitle>${data.subtitle}</p>
+					<p class=title>${report.title}</p>
+					<p class=subtitle>${report.subtitle}</p>
 				</div>
 			</div>
 			<div class=details>
 				<div class=grade>
 					<span>Grade</span>
-					<span>${data.grade}</span>
+					<span>${report.grade}</span>
 				</div>
 				<div class=extra></div>
 			</div>

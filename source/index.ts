@@ -48,7 +48,7 @@ void async function() {
 
 	// initialize catalog
 	const catalog = <UfoCatalog>document.createElement("ufo-catalog")
-	catalog.cardData = data
+	catalog.reports = data
 	loading.end()
 	main.appendChild(catalog)
 }()
